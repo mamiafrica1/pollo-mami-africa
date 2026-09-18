@@ -4,312 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pollo Mami Africa</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#fff8ed;
-  color:#222;
-}
-
-header{
-  background:#111;
-  color:white;
-  text-align:center;
-  padding:25px 15px;
-}
-
-header h1{
-  margin:0;
-  color:#ffd400;
-  font-size:30px;
-}
-
-header p{
-  margin:7px 0;
-}
-
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:15px 15px 160px;
-}
-
-h2{
-  background:#111;
-  color:#ffd400;
-  padding:11px;
-  border-radius:8px;
-  margin-top:25px;
-}
-
-.product{
-  background:white;
-  margin:10px 0;
-  padding:14px;
-  border-radius:10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  box-shadow:0 2px 7px rgba(0,0,0,.12);
-}
-
-.product-info{
-  flex:1;
-}
-
-.product-name{
-  font-weight:bold;
-  font-size:16px;
-}
-
-.price{
-  color:#d90000;
-  font-weight:bold;
-  margin-top:5px;
-}
-
-.add{
-  background:#e00000;
-  color:white;
-  border:none;
-  padding:10px 13px;
-  border-radius:7px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.add:active{
-  transform:scale(.97);
-}
-
-/* CANASTA */
-
-.cart{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  border-top:3px solid #111;
-  box-shadow:0 -3px 15px rgba(0,0,0,.2);
-  z-index:999;
-  padding:10px;
-}
-
-.cart-header{
-  max-width:900px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.cart-button{
-  background:#111;
-  color:#ffd400;
-  border:none;
-  padding:11px 15px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.cart-number{
-  background:#e00000;
-  color:white;
-  border-radius:20px;
-  padding:3px 8px;
-  margin-left:5px;
-}
-
-.cart-content{
-  max-width:900px;
-  margin:10px auto 0;
-  display:none;
-  max-height:55vh;
-  overflow-y:auto;
-}
-
-.cart-item{
-  border-bottom:1px solid #ddd;
-  padding:10px 0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.quantity{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.quantity button{
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:6px;
-  background:#eee;
-  font-size:18px;
-  cursor:pointer;
-}
-
-.total{
-  text-align:right;
-  font-size:20px;
-  font-weight:bold;
-  padding:15px 0;
-}
-
-.whatsapp{
-  width:100%;
-  background:#25D366;
-  color:white;
-  border:none;
-  padding:14px;
-  border-radius:8px;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.empty{
-  text-align:center;
-  padding:20px;
-  color:#777;
-}
-
-@media(max-width:600px){
-
-  .product-name{
-    font-size:15px;
-  }
-
-  .add{
-    padding:9px 10px;
-    font-size:13px;
-  }
-
-  .cart-item{
-    font-size:14px;
-  }
-}
+body{margin:0;font-family:Arial,sans-serif;background:#fff8f0;color:#222}
+header{background:#111;color:#fff;padding:22px 16px;text-align:center}
+header h1{margin:0;color:#ffd21c;font-size:34px}
+header p{margin:6px 0 0;font-size:18px}
+.container{max-width:1000px;margin:auto;padding:18px}
+h2{background:#111;color:#ffd21c;padding:12px 16px;border-radius:10px;margin:22px 0 12px}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.item{background:#fff;border:2px solid #e7b900;border-radius:12px;padding:14px;display:flex;justify-content:space-between;gap:12px;box-shadow:0 2px 7px #0001}
+.name{font-weight:bold}
+.price{font-weight:bold;color:#d71920;white-space:nowrap}
+.info{background:#111;color:#fff;border-radius:12px;padding:18px;margin-top:24px;text-align:center}
+.info strong{color:#ffd21c}
+.whatsapp{display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:12px 20px;border-radius:25px;font-weight:bold;margin-top:10px}
+footer{text-align:center;padding:22px;font-weight:bold}
 </style>
 </head>
-
 <body>
 
 <header>
 <h1>🍗 POLLO MAMI AFRICA</h1>
 <p>¡Sabroso y jugoso!</p>
-<p>Mercado Gastronómico Jacaranda, Cartago</p>
 </header>
 
 <div class="container">
 
-<!-- PLATOS ESPECIALES -->
-
-<h2>🍗 Platos Especiales</h2>
-
-<div class="product">
-<div class="product-info">
-<div class="product-name">Pechuga + ala + papas</div>
-<div class="price">₡2.700</div>
-</div>
-<button class="add" onclick="addToCart('Pechuga + ala + papas',2700)">Agregar</button>
-</div>
-
-<div class="product">
-<div class="product-info">
-<div class="product-name">Pechuga + ala + tortilla</div>
-<div class="price">₡2.200</div>
-</div>
-<button class="add" onclick="addToCart('Pechuga + ala + tortilla',2200)">Agregar</button>
+<h2>🍗 PLATOS ESPECIALES</h2>
+<div class="menu">
+<div class="item"><span class="name">Pechuga + ala + papas</span><span class="price">₡2.700</span></div>
+<div class="item"><span class="name">Pechuga + ala + tortilla</span><span class="price">₡2.200</span></div>
+<div class="item"><span class="name">Muslo + cuarto + tortilla</span><span class="price">₡1.900</span></div>
+<div class="item"><span class="name">Muslo + cuarto + papas</span><span class="price">₡2.200</span></div>
+<div class="item"><span class="name">5 alitas</span><span class="price">₡2.300</span></div>
+<div class="item"><span class="name">10 trozos</span><span class="price">₡2.100</span></div>
+<div class="item"><span class="name">14 trozos</span><span class="price">₡2.600</span></div>
+<div class="item"><span class="name">Muslo + ala</span><span class="price">₡1.650</span></div>
+<div class="item"><span class="name">Cuarto + ala</span><span class="price">₡1.750</span></div>
 </div>
 
-<div class="product">
-<div class="product-info">
-<div class="product-name">Muslo + cuarto + tortilla</div>
-<div class="price">₡1.900</div>
-</div>
-<button class="add" onclick="addToCart('Muslo + cuarto + tortilla',1900)">Agregar</button>
-</div>
-
-<div class="product">
-<div class="product-info">
-<div class="product-name">Muslo + cuarto + papas</div>
-<div class="price">₡2.200</div>
-</div>
-<button class="add" onclick="addToCart('Muslo + cuarto + papas',2200)">Agregar</button>
+<h2>🍗 BANDEJAS</h2>
+<div class="menu">
+<div class="item"><span class="name">6 piezas</span><span class="price">₡5.800</span></div>
+<div class="item"><span class="name">8 piezas</span><span class="price">₡8.000</span></div>
+<div class="item"><span class="name">10 piezas</span><span class="price">₡10.500</span></div>
 </div>
 
-<div class="product">
-<div class="product-info">
-<div class="product-name">5 alitas</div>
-<div class="price">₡2.300</div>
-</div>
-<button class="add" onclick="addToCart('5 alitas',2300)">Agregar</button>
-</div>
-
-<div class="product">
-<div class="product-info">
-<div class="product-name">10 trozos</div>
-<div class="price">₡2.100</div>
-</div>
-<button class="add" onclick="addToCart('10 trozos',2100)">Agregar</button>
+<h2>🍚 OTROS PLATOS</h2>
+<div class="menu">
+<div class="item"><span class="name">Arroz con pollo y plátano maduro frito</span><span class="price">₡3.500</span></div>
+<div class="item"><span class="name">3 tacos arreglados</span><span class="price">₡1.500</span></div>
+<div class="item"><span class="name">Caldosa</span><span class="price">₡1.250</span></div>
+<div class="item"><span class="name">Chifrijo</span><span class="price">₡4.000</span></div>
 </div>
 
-<div class="product">
-<div class="product-info">
-<div class="product-name">14 trozos</div>
-<div class="price">₡2.600</div>
-</div>
-<button class="add" onclick="addToCart('14 trozos',2600)">Agregar</button>
+<h2>🍗 MUSLO Y CUARTO</h2>
+<div class="menu">
+<div class="item"><span class="name">Muslo y cuarto</span><span class="price">₡1.750</span></div>
 </div>
 
-<div class="product">
-<div class="product-info">
-<div class="product-name">Muslo + ala</div>
-<div class="price">₡1.650</div>
-</div>
-<button class="add" onclick="addToCart('Muslo + ala',1650)">Agregar</button>
-</div>
-
-<div class="product">
-<div class="product-info">
-<div class="product-name">Cuarto + ala</div>
-<div class="price">₡1.750</div>
-</div>
-<button class="add" onclick="addToCart('Cuarto + ala',1750)">Agregar</button>
+<h2>🍟 ADICIONALES</h2>
+<div class="menu">
+<div class="item"><span class="name">Papas fritas 225 g</span><span class="price">₡1.300</span></div>
+<div class="item"><span class="name">Ensalada fría</span><span class="price">₡600</span></div>
+<div class="item"><span class="name">Salsas</span><span class="price">₡600</span></div>
 </div>
 
-
-<!-- BANDEJAS -->
-
-<h2>🍗 Bandejas</h2>
-
-<div class="product">
-<div class="product-info">
-<div class="product-name">8 piezas</div>
-<div class="price">₡8.000</div>
-</div>
-<button class="add" onclick="addToCart('8 piezas',8000)">Agregar</button>
+<h2>🍗 CHICKEN FINGERS</h2>
+<div class="menu">
+<div class="item"><span class="name">Chicken Fingers</span><span class="price">₡3.500</span></div>
 </div>
 
-<div class="product">
-<div class="product-info">
-<div class="product-name">6 piezas</div>
-<div class="price">₡5.800</div>
-</div>
-<button class="add" onclick="addToCart('6 piezas',5800)">Agregar</button>
+<div class="info">
+<p><strong>📍 Ubicación</strong><br>Mercado Gastronómico Jacaranda, Cartago</p>
+<p><strong>🕐 Horarios</strong><br>
+Martes a jueves: 12:00 p.m. – 8:00 p.m.<br>
+Viernes y sábado: 12:00 p.m. – 9:00 p.m.<br>
+Domingo: 12:00 p.m. – 8:00 p.m.
+</p>
+<p><strong>📲 Pedidos por WhatsApp</strong></p>
+<a class="whatsapp" href="https://wa.me/50688054961">8805-4961</a>
 </div>
 
-<div class="product">
-<div class="product-info">
-<div
+</div>
+
+<footer>¡Gracias por preferir Pollo Mami Africa! ❤️</footer>
+</body>
+</html>
