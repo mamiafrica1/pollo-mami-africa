@@ -259,7 +259,7 @@ function sendOrder(){
     return;
   }
 
-  let message = "Hola, quiero hacer este pedido en Pollo Mami Africa:%0A%0A";
+  let message = "Hola, quiero hacer este pedido en Pollo Mami Africa:\n\n";
 
   let total = 0;
 
@@ -275,24 +275,15 @@ function sendOrder(){
       item.name +
       " = ₡" +
       money(subtotal) +
-      "%0A";
+      "\n";
   });
 
-  message += "%0ATotal: ₡" + money(total);
+  message += "\nTotal: ₡" + money(total);
 
-  /*
-  IMPORTANTE:
-  Aquí debes colocar el número de WhatsApp
-  de Pollo Mami Africa.
-  
-  Ejemplo:
-  50688888888
-  */
-
-  const phone = "506XXXXXXXX";
+  const phone = "50688054961";
 
   window.open(
-    "https://wa.me/" + phone + "?text=" + message,
+    "https://wa.me/" + phone + "?text=" + encodeURIComponent(message),
     "_blank"
   );
 }
