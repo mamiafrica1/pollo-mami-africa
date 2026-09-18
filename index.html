@@ -1,1 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pollo Mami Africa</title>
 
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fff8f0;
+  color:#222;
+}
+header{
+  background:#171717;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+header h1{
+  margin:0;
+  font-size:30px;
+}
+header p{
+  margin:8px 0 0;
+}
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:15px;
+}
+h2{
+  text-align:center;
+  margin-top:25px;
+}
+.product{
+  background:white;
+  border-radius:15px;
+  padding:15px;
+  margin:12px 0;
+  box-shadow:0 2px 8px #0002;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.product h3{
+  margin:0 0 5px;
+}
+.price{
+  font-weight:bold;
+  font-size:18px;
+}
+button{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  background:#e67e22;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+.cart{
+  background:white;
+  border-radius:15px;
+  padding:18px;
+  margin-top:25px;
+  box-shadow:0 2px 8px #0002;
+}
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid #ddd;
+}
+.total{
+  font-size:22px;
+  font-weight:bold;
+  text-align:right;
+  margin-top:15px;
+}
+.order{
+  width:100%;
+  margin-top:15px;
+  background:#25d366;
+  font-size:18px;
+}
+.empty{
+  text-align:center;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🍗 POLLO MAMI AFRICA</h1>
+  <p>Pollo crujiente y delicioso</p>
+</header>
+
+<div class="container">
+
+<h2>🍗 Nuestro menú</h2>
+
+<div id="menu"></div>
+
+<div class="cart">
+  <h2>🛒 Tu pedido</h2>
+  <div id="cart"></div>
+
+  <div class="total">
+    Total: ₡<span id="total">0</span>
+  </div>
+
+  <button class="order" onclick="sendOrder()">
+    📲 Pedir por WhatsApp
+  </button>
+</div>
+
+</div>
+
+<script>
+
+const products = [
+  {name:"Cuarto solo", price:900},
+  {name:"Muslo solo", price:800},
+  {name:"Pechuga sola", price:1500},
+
+  {name:"Pechuga + ala + papas", price:2000},
+  {name:"Muslo y cuarto + papas", price:1900},
+
+  {name:"6 piezas + papas y bebida", price:5500},
+  {name:"8 piezas + papas y bebida", price:8000},
+  {name:"10 piezas + papas y bebida", price:10500},
+
+  {name:"10 trozos", price:2000},
+  {name:"14 trozos", price:2500},
+
+  {name:"5 alitas", price:1200},
+  {name:"10 alitas", price:2200},
+
+  {name:"Chicharrón de pollo", price:500},
+  {name:"Chicken fingers 150g + papas", price:3200},
+  {name:"Chifrijo", price:4000},
+  {name:"Tacos", price:1500}
+];
+
+let cart = [];
+
+function money(number){
+  return number.toLocaleString("es-CR");
+}
+
+function showMenu(){
+
+  const menu = document.getElementById("menu");
+
+  menu.innerHTML = products.map((p,index)=>`
+
+    <div class="product">
+
+      <div>
+        <h3>${p.name}</h3>
+        <div class="price">₡${money(p.price)}</div>
+      </div>
+
+      <button onclick="addToCart(${index})">
+        Agregar
+      </button>
+
+    </div>
+
+  `).join("");
+}
+
+function addToCart(index){
+
+  const product = products[index];
+
+  const existing = cart.find(item => item.name === product.name);
+
+  if(existing){
+    existing.quantity++;
+  }else{
+    cart.push({
+      name:product.name,
+      price:product.price,
+      quantity:1
+    });
+  }
+
+  showCart();
+}
+
+function removeFromCart(index){
+
+  if(cart[index].quantity > 1){
+    cart[index].quantity--;
+  }else{
+    cart.splice(index,1);
+  }
+
+  showCart();
+}
+
+function showCart(){
+
+  const cartDiv = document.getElementById("cart");
+
+  if(cart.length === 0){
+
+    cartDiv.innerHTML =
+      '<p class="empty">Tu carrito está vacío.</p>';
+
+    document.getElementById("total").textContent = "0";
+
+    return;
+  }
+
+  let total = 0;
+
+  cartDiv.innerHTML = cart.map((item,index)=>{
+
+    const subtotal = item.price * item.quantity;
+
+    total += subtotal;
+
+    return `
+      <div class="cart-item">
+
+        <span>
+          ${item.quantity} × ${item.name}
+        </span>
+
+        <span>
+          ₡${money(subtotal)}
+          <button onclick="removeFromCart(${index})">
+            −
+          </button>
+        </span>
+
+      </div>
+    `;
+
+  }).join("");
+
+  document.getElementById("total").textContent = money(total);
+}
+
+function sendOrder(){
+
+  if(cart.length === 0){
+
+    alert("Agrega productos al carrito primero.");
+
+    return;
+  }
+
+  let message = "Hola, quiero hacer este pedido en Pollo Mami Africa:%0A%0A";
+
+  let total = 0;
+
+  cart.forEach(item => {
+
+    const subtotal = item.price * item.quantity;
+
+    total += subtotal;
+
+    message +=
+      item.quantity +
+      " x " +
+      item.name +
+      " = ₡" +
+      money(subtotal) +
+      "%0A";
+  });
+
+  message += "%0ATotal: ₡" + money(total);
+
+  /*
+  IMPORTANTE:
+  Aquí debes colocar el número de WhatsApp
+  de Pollo Mami Africa.
+  
+  Ejemplo:
+  50688888888
+  */
+
+  const phone = "506XXXXXXXX";
+
+  window.open(
+    "https://wa.me/" + phone + "?text=" + message,
+    "_blank"
+  );
+}
+
+showMenu();
+showCart();
+
+</script>
+
+</body>
+</html>
