@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pollo Mami Africa</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -17,91 +20,172 @@ body{
 
 header{
   background:#111;
-  color:#fff;
-  padding:22px 16px;
+  color:white;
   text-align:center;
+  padding:22px 10px;
 }
 
 header h1{
   margin:0;
-  color:#ffd21c;
-  font-size:34px;
+  font-size:30px;
 }
 
 header p{
-  margin:6px 0 0;
-  font-size:18px;
+  margin:8px 0 0;
+  font-size:15px;
 }
 
 .container{
-  max-width:1000px;
+  max-width:900px;
   margin:auto;
-  padding:18px;
+  padding:20px 15px 120px;
 }
 
 h2{
-  background:#111;
-  color:#ffd21c;
-  padding:12px 16px;
-  border-radius:10px;
-  margin:22px 0 12px;
+  margin-top:28px;
+  border-bottom:2px solid #111;
+  padding-bottom:8px;
 }
 
-.menu{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:12px;
-}
-
-.item{
-  background:#fff;
-  border:2px solid #e7b900;
+.product{
+  background:white;
+  margin:12px 0;
+  padding:15px;
   border-radius:12px;
-  padding:14px;
+  box-shadow:0 2px 8px #0001;
   display:flex;
   justify-content:space-between;
-  gap:12px;
-  box-shadow:0 2px 7px #0001;
+  align-items:center;
+  gap:10px;
 }
 
-.name{
+.product-info{
+  flex:1;
+}
+
+.product-name{
   font-weight:bold;
+  font-size:17px;
 }
 
 .price{
+  margin-top:5px;
   font-weight:bold;
-  color:#d71920;
-  white-space:nowrap;
 }
 
-.info{
+button{
+  border:0;
+  border-radius:8px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.add{
   background:#111;
-  color:#fff;
-  border-radius:12px;
-  padding:18px;
-  margin-top:24px;
-  text-align:center;
+  color:white;
 }
 
-.info strong{
-  color:#ffd21c;
+.add:hover{
+  opacity:.85;
+}
+
+/* CARRITO */
+
+.cart{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  border-top:2px solid #111;
+  padding:12px;
+  box-shadow:0 -3px 15px #0002;
+  z-index:1000;
+}
+
+.cart-top{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.cart-button{
+  background:#111;
+  color:white;
+  font-size:16px;
+}
+
+.cart-count{
+  background:#e63946;
+  padding:3px 8px;
+  border-radius:20px;
+  margin-left:5px;
+}
+
+.cart-content{
+  max-width:900px;
+  margin:12px auto 0;
+  display:none;
+  max-height:55vh;
+  overflow:auto;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.quantity button{
+  padding:5px 9px;
+  background:#eee;
+}
+
+.total{
+  font-size:20px;
+  font-weight:bold;
+  text-align:right;
+  margin:15px 0;
 }
 
 .whatsapp{
-  display:inline-block;
-  background:#25d366;
-  color:#fff;
-  text-decoration:none;
-  padding:12px 20px;
-  border-radius:25px;
-  font-weight:bold;
-  margin-top:10px;
+  width:100%;
+  background:#25D366;
+  color:white;
+  font-size:17px;
 }
 
-footer{
+.empty{
   text-align:center;
-  padding:22px;
-  font-weight:bold;
+  padding:20px;
+  color:#777;
+}
+
+@media(max-width:600px){
+  .product{
+    align-items:flex-start;
+  }
+
+  .product-name{
+    font-size:15px;
+  }
+
+  .add{
+    padding:9px 10px;
+    font-size:13px;
+  }
 }
 </style>
 </head>
@@ -109,182 +193,357 @@ footer{
 <body>
 
 <header>
-<h1>🍗 POLLO MAMI AFRICA</h1>
-<p>¡Sabroso y jugoso!</p>
+  <h1>🍗 POLLO MAMI AFRICA</h1>
+  <p>Pollo crujiente y mucho sabor</p>
+  <p>Mercado Gastronómico Jacaranda, Cartago</p>
 </header>
 
 <div class="container">
 
-<h2>🍗 PLATOS ESPECIALES</h2>
+<h2>🍗 Piezas de pollo</h2>
 
-<div class="menu">
-
-<div class="item">
-<span class="name">Pechuga + ala + papas</span>
-<span class="price">₡2.700</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Cuarto solo</div>
+    <div class="price">₡900</div>
+  </div>
+  <button class="add" onclick="addToCart('Cuarto solo',900)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">Pechuga + ala + tortilla</span>
-<span class="price">₡2.200</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Muslo solo</div>
+    <div class="price">₡800</div>
+  </div>
+  <button class="add" onclick="addToCart('Muslo solo',800)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">Muslo + cuarto + tortilla</span>
-<span class="price">₡1.900</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Pechuga sola</div>
+    <div class="price">₡1500</div>
+  </div>
+  <button class="add" onclick="addToCart('Pechuga sola',1500)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">Muslo + cuarto + papas</span>
-<span class="price">₡2.200</span>
+
+<h2>🍟 Combos personales</h2>
+
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Pechuga + ala + papas</div>
+    <div class="price">₡2000</div>
+  </div>
+  <button class="add" onclick="addToCart('Pechuga + ala + papas',2000)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">5 alitas</span>
-<span class="price">₡2.300</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Muslo + cuarto + papas</div>
+    <div class="price">₡1900</div>
+  </div>
+  <button class="add" onclick="addToCart('Muslo + cuarto + papas',1900)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">10 trozos</span>
-<span class="price">₡2.100</span>
+
+<h2>👨‍👩‍👧‍👦 Combos familiares</h2>
+
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">6 piezas + papas + bebida</div>
+    <div class="price">₡5500</div>
+  </div>
+  <button class="add" onclick="addToCart('6 piezas + papas + bebida',5500)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">14 trozos</span>
-<span class="price">₡2.600</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">8 piezas + papas + bebida</div>
+    <div class="price">₡8000</div>
+  </div>
+  <button class="add" onclick="addToCart('8 piezas + papas + bebida',8000)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">Muslo + ala</span>
-<span class="price">₡1.650</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">10 piezas + papas + bebida</div>
+    <div class="price">₡10500</div>
+  </div>
+  <button class="add" onclick="addToCart('10 piezas + papas + bebida',10500)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">Cuarto + ala</span>
-<span class="price">₡1.750</span>
+
+<h2>🔥 Alitas y trozos</h2>
+
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">5 alitas</div>
+    <div class="price">₡1200</div>
+  </div>
+  <button class="add" onclick="addToCart('5 alitas',1200)">Agregar</button>
 </div>
 
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">10 alitas</div>
+    <div class="price">₡2200</div>
+  </div>
+  <button class="add" onclick="addToCart('10 alitas',2200)">Agregar</button>
 </div>
 
-<h2>🍗 BANDEJAS</h2>
-
-<div class="menu">
-
-<div class="item">
-<span class="name">6 piezas</span>
-<span class="price">₡5.800</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">10 trozos</div>
+    <div class="price">₡2000</div>
+  </div>
+  <button class="add" onclick="addToCart('10 trozos',2000)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">8 piezas</span>
-<span class="price">₡8.000</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">14 trozos</div>
+    <div class="price">₡2500</div>
+  </div>
+  <button class="add" onclick="addToCart('14 trozos',2500)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">10 piezas</span>
-<span class="price">₡10.500</span>
+
+<h2>🍗 Especialidades</h2>
+
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Chicken Fingers 150 g + papas</div>
+    <div class="price">₡3200</div>
+  </div>
+  <button class="add" onclick="addToCart('Chicken Fingers 150 g + papas',3200)">Agregar</button>
 </div>
 
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Chicharrón de pollo</div>
+    <div class="price">₡500</div>
+  </div>
+  <button class="add" onclick="addToCart('Chicharrón de pollo',500)">Agregar</button>
 </div>
 
-<h2>🍚 OTROS PLATOS</h2>
-
-<div class="menu">
-
-<div class="item">
-<span class="name">Arroz con pollo y plátano maduro frito</span>
-<span class="price">₡3.500</span>
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Tacos</div>
+    <div class="price">₡1500</div>
+  </div>
+  <button class="add" onclick="addToCart('Tacos',1500)">Agregar</button>
 </div>
 
-<div class="item">
-<span class="name">3 tacos arreglados</span>
-<span class="price">₡1.500</span>
-</div>
-
-<div class="item">
-<span class="name">Caldosa</span>
-<span class="price">₡1.250</span>
-</div>
-
-<div class="item">
-<span class="name">Chifrijo</span>
-<span class="price">₡4.000</span>
-</div>
-
-</div>
-
-<h2>🍗 MUSLO Y CUARTO</h2>
-
-<div class="menu">
-
-<div class="item">
-<span class="name">Muslo y cuarto</span>
-<span class="price">₡1.750</span>
-</div>
-
-</div>
-
-<h2>🍟 ADICIONALES</h2>
-
-<div class="menu">
-
-<div class="item">
-<span class="name">Papas fritas 225 g</span>
-<span class="price">₡1.300</span>
-</div>
-
-<div class="item">
-<span class="name">Ensalada fría</span>
-<span class="price">₡600</span>
-</div>
-
-<div class="item">
-<span class="name">Salsas</span>
-<span class="price">₡600</span>
-</div>
-
-</div>
-
-<h2>🍗 CHICKEN FINGERS</h2>
-
-<div class="menu">
-
-<div class="item">
-<span class="name">Chicken Fingers</span>
-<span class="price">₡3.500</span>
-</div>
-
-</div>
-
-<div class="info">
-
-<p>
-<strong>📍 Ubicación</strong><br>
-Mercado Gastronómico Jacaranda, Cartago
-</p>
-
-<p>
-<strong>🕐 Horarios</strong><br>
-Martes a jueves: 12:00 p.m. – 8:00 p.m.<br>
-Viernes y sábado: 12:00 p.m. – 9:00 p.m.<br>
-Domingo: 12:00 p.m. – 8:00 p.m.
-</p>
-
-<p>
-<strong>📲 Pedidos por WhatsApp</strong>
-</p>
-
-<a class="whatsapp" href="https://wa.me/50688054961">
-8805-4961
-</a>
-
+<div class="product">
+  <div class="product-info">
+    <div class="product-name">Chifrijo</div>
+    <div class="price">₡4000</div>
+  </div>
+  <button class="add" onclick="addToCart('Chifrijo',4000)">Agregar</button>
 </div>
 
 </div>
 
-<footer>
-¡Gracias por preferir Pollo Mami Africa! ❤️
-</footer>
+
+<!-- CARRITO -->
+
+<div class="cart">
+
+  <div class="cart-top">
+
+    <strong>🛒 Mi pedido</strong>
+
+    <button class="cart-button" onclick="toggleCart()">
+      Ver canasta
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+  </div>
+
+  <div class="cart-content" id="cartContent">
+
+    <div id="cartItems"></div>
+
+    <div class="total">
+      Total: ₡<span id="cartTotal">0</span>
+    </div>
+
+    <button class="whatsapp" onclick="sendWhatsApp()">
+      📲 Enviar pedido por WhatsApp
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let cart = [];
+
+function addToCart(name, price){
+
+  const existing = cart.find(item => item.name === name);
+
+  if(existing){
+    existing.quantity++;
+  }else{
+    cart.push({
+      name:name,
+      price:price,
+      quantity:1
+    });
+  }
+
+  updateCart();
+
+  document.getElementById("cartContent").style.display="block";
+}
+
+
+function updateCart(){
+
+  const container = document.getElementById("cartItems");
+
+  const count = document.getElementById("cartCount");
+
+  const totalElement = document.getElementById("cartTotal");
+
+  container.innerHTML="";
+
+  let total=0;
+  let totalItems=0;
+
+  if(cart.length===0){
+
+    container.innerHTML='<div class="empty">Tu canasta está vacía.</div>';
+
+  }else{
+
+    cart.forEach((item,index)=>{
+
+      const subtotal=item.price*item.quantity;
+
+      total+=subtotal;
+
+      totalItems+=item.quantity;
+
+      const div=document.createElement("div");
+
+      div.className="cart-item";
+
+      div.innerHTML=`
+
+        <div>
+          <strong>${item.name}</strong><br>
+          ₡${item.price.toLocaleString()}
+        </div>
+
+        <div class="quantity">
+
+          <button onclick="changeQuantity(${index},-1)">−</button>
+
+          <strong>${item.quantity}</strong>
+
+          <button onclick="changeQuantity(${index},1)">+</button>
+
+        </div>
+
+        <strong>₡${subtotal.toLocaleString()}</strong>
+
+      `;
+
+      container.appendChild(div);
+
+    });
+
+  }
+
+  count.textContent=totalItems;
+
+  totalElement.textContent=total.toLocaleString();
+
+}
+
+
+function changeQuantity(index,change){
+
+  cart[index].quantity+=change;
+
+  if(cart[index].quantity<=0){
+
+    cart.splice(index,1);
+
+  }
+
+  updateCart();
+
+}
+
+
+function toggleCart(){
+
+  const content=document.getElementById("cartContent");
+
+  if(content.style.display==="block"){
+
+    content.style.display="none";
+
+  }else{
+
+    content.style.display="block";
+
+  }
+
+}
+
+
+function sendWhatsApp(){
+
+  if(cart.length===0){
+
+    alert("Agrega productos a la canasta primero.");
+
+    return;
+
+  }
+
+  let message="🍗 *PEDIDO - POLLO MAMI AFRICA*%0A%0A";
+
+  cart.forEach(item=>{
+
+    const subtotal=item.price*item.quantity;
+
+    message+=
+      "• "+item.quantity+" x "+item.name+
+      " - ₡"+subtotal.toLocaleString()+"%0A";
+
+  });
+
+  let total=cart.reduce(
+    (sum,item)=>sum+(item.price*item.quantity),
+    0
+  );
+
+  message+=
+    "%0A💰 *TOTAL: ₡"+
+    total.toLocaleString()+
+    "*%0A%0A";
+
+  message+="Hola, quiero realizar este pedido. 😊";
+
+  const phone="50688054961";
+
+  window.open(
+    "https://wa.me/"+phone+"?text="+message,
+    "_blank"
+  );
+
+}
+
+updateCart();
+
+</script>
 
 </body>
 </html>
