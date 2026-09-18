@@ -7,89 +7,101 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
   background:#fff8f0;
   color:#222;
 }
+
 header{
-  background:#171717;
-  color:white;
+  background:#111;
+  color:#fff;
+  padding:22px 16px;
   text-align:center;
-  padding:25px 15px;
 }
+
 header h1{
   margin:0;
-  font-size:30px;
+  color:#ffd21c;
+  font-size:34px;
 }
+
 header p{
-  margin:8px 0 0;
+  margin:6px 0 0;
+  font-size:18px;
 }
+
 .container{
-  max-width:700px;
+  max-width:1000px;
   margin:auto;
-  padding:15px;
+  padding:18px;
 }
+
 h2{
-  text-align:center;
-  margin-top:25px;
+  background:#111;
+  color:#ffd21c;
+  padding:12px 16px;
+  border-radius:10px;
+  margin:22px 0 12px;
 }
-.product{
-  background:white;
-  border-radius:15px;
-  padding:15px;
-  margin:12px 0;
-  box-shadow:0 2px 8px #0002;
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:12px;
+}
+
+.item{
+  background:#fff;
+  border:2px solid #e7b900;
+  border-radius:12px;
+  padding:14px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:10px;
+  gap:12px;
+  box-shadow:0 2px 7px #0001;
 }
-.product h3{
-  margin:0 0 5px;
+
+.name{
+  font-weight:bold;
 }
+
 .price{
   font-weight:bold;
-  font-size:18px;
+  color:#d71920;
+  white-space:nowrap;
 }
-button{
-  border:0;
-  border-radius:10px;
-  padding:10px 14px;
-  background:#e67e22;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-.cart{
-  background:white;
-  border-radius:15px;
+
+.info{
+  background:#111;
+  color:#fff;
+  border-radius:12px;
   padding:18px;
-  margin-top:25px;
-  box-shadow:0 2px 8px #0002;
-}
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
-  border-bottom:1px solid #ddd;
-}
-.total{
-  font-size:22px;
-  font-weight:bold;
-  text-align:right;
-  margin-top:15px;
-}
-.order{
-  width:100%;
-  margin-top:15px;
-  background:#25d366;
-  font-size:18px;
-}
-.empty{
+  margin-top:24px;
   text-align:center;
-  color:#777;
+}
+
+.info strong{
+  color:#ffd21c;
+}
+
+.whatsapp{
+  display:inline-block;
+  background:#25d366;
+  color:#fff;
+  text-decoration:none;
+  padding:12px 20px;
+  border-radius:25px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+footer{
+  text-align:center;
+  padding:22px;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -97,201 +109,21 @@ button{
 <body>
 
 <header>
-  <h1>🍗 POLLO MAMI AFRICA</h1>
-  <p>Pollo crujiente y delicioso</p>
+<h1>🍗 POLLO MAMI AFRICA</h1>
+<p>¡Sabroso y jugoso!</p>
 </header>
 
 <div class="container">
 
-<h2>🍗 Nuestro menú</h2>
+<h2>🍗 PLATOS ESPECIALES</h2>
 
-<div id="menu"></div>
+<div class="menu">
 
-<div class="cart">
-  <h2>🛒 Tu pedido</h2>
-  <div id="cart"></div>
-
-  <div class="total">
-    Total: ₡<span id="total">0</span>
-  </div>
-
-  <button class="order" onclick="sendOrder()">
-    📲 Pedir por WhatsApp
-  </button>
+<div class="item">
+<span class="name">Pechuga + ala + papas</span>
+<span class="price">₡2.700</span>
 </div>
 
-</div>
-
-<script>
-
-const products = [
-  {name:"Cuarto solo", price:900},
-  {name:"Muslo solo", price:800},
-  {name:"Pechuga sola", price:1500},
-
-  {name:"Pechuga + ala + papas", price:2000},
-  {name:"Muslo y cuarto + papas", price:1900},
-
-  {name:"6 piezas + papas y bebida", price:5500},
-  {name:"8 piezas + papas y bebida", price:8000},
-  {name:"10 piezas + papas y bebida", price:10500},
-
-  {name:"10 trozos", price:2000},
-  {name:"14 trozos", price:2500},
-
-  {name:"5 alitas", price:1200},
-  {name:"10 alitas", price:2200},
-
-  {name:"Chicharrón de pollo", price:500},
-  {name:"Chicken fingers 150g + papas", price:3200},
-  {name:"Chifrijo", price:4000},
-  {name:"Tacos", price:1500}
-];
-
-let cart = [];
-
-function money(number){
-  return number.toLocaleString("es-CR");
-}
-
-function showMenu(){
-
-  const menu = document.getElementById("menu");
-
-  menu.innerHTML = products.map((p,index)=>`
-
-    <div class="product">
-
-      <div>
-        <h3>${p.name}</h3>
-        <div class="price">₡${money(p.price)}</div>
-      </div>
-
-      <button onclick="addToCart(${index})">
-        Agregar
-      </button>
-
-    </div>
-
-  `).join("");
-}
-
-function addToCart(index){
-
-  const product = products[index];
-
-  const existing = cart.find(item => item.name === product.name);
-
-  if(existing){
-    existing.quantity++;
-  }else{
-    cart.push({
-      name:product.name,
-      price:product.price,
-      quantity:1
-    });
-  }
-
-  showCart();
-}
-
-function removeFromCart(index){
-
-  if(cart[index].quantity > 1){
-    cart[index].quantity--;
-  }else{
-    cart.splice(index,1);
-  }
-
-  showCart();
-}
-
-function showCart(){
-
-  const cartDiv = document.getElementById("cart");
-
-  if(cart.length === 0){
-
-    cartDiv.innerHTML =
-      '<p class="empty">Tu carrito está vacío.</p>';
-
-    document.getElementById("total").textContent = "0";
-
-    return;
-  }
-
-  let total = 0;
-
-  cartDiv.innerHTML = cart.map((item,index)=>{
-
-    const subtotal = item.price * item.quantity;
-
-    total += subtotal;
-
-    return `
-      <div class="cart-item">
-
-        <span>
-          ${item.quantity} × ${item.name}
-        </span>
-
-        <span>
-          ₡${money(subtotal)}
-          <button onclick="removeFromCart(${index})">
-            −
-          </button>
-        </span>
-
-      </div>
-    `;
-
-  }).join("");
-
-  document.getElementById("total").textContent = money(total);
-}
-
-function sendOrder(){
-
-  if(cart.length === 0){
-
-    alert("Agrega productos al carrito primero.");
-
-    return;
-  }
-
-  let message = "Hola, quiero hacer este pedido en Pollo Mami Africa:\n\n";
-
-  let total = 0;
-
-  cart.forEach(item => {
-
-    const subtotal = item.price * item.quantity;
-
-    total += subtotal;
-
-    message +=
-      item.quantity +
-      " x " +
-      item.name +
-      " = ₡" +
-      money(subtotal) +
-      "\n";
-  });
-
-  message += "\nTotal: ₡" + money(total);
-
-  const phone = "50688054961";
-
-  window.open(
-    "https://wa.me/" + phone + "?text=" + encodeURIComponent(message),
-    "_blank"
-  );
-}
-
-showMenu();
-showCart();
-
-</script>
-
-</body>
-</html>
+<div class="item">
+<span class="name">Pechuga + ala + tortilla</span>
+<span class="price">₡2.
